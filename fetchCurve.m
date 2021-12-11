@@ -1,11 +1,38 @@
 function curve = fetchCurve(path)
+% fetchCurve fetches curve data from splinecloud.com by curve's id
+%
+% Examples:
+%	fetchCurve(path)
+%
+% This function will return NURBS curve data in the following format:
+%	struct with fields:
+%       uid: 'char',
+%       name: 'char',
+%       curve_type: 'char',
+%       order: 'double',
+%       spline: 1x1 struct
+%
+% IN:
+%	path - curve's id or path to it
+%	examples: 'http://alpha.splinecloud.com/api/curves/id/CURVE_ID' or 'CURVE_ID'
+%
+% OUT:
+%	curve - NURBS curve
+
 import matlab.net.*
 import matlab.net.http.*
 
-r = RequestMessage;
-uri = URI(path);
-resp = send(r, uri);
-curve = resp.Body.Data;
+defaultAdress = 'http://alpha.splinecloud.com/api/curves/id/';
+finalPath = '';
 
+if contains(path, defaultAdress)
+    finalPath = path;
+else
+    finalPath = strcat(defaultAdress, path);
 end
-
+    
+    r = RequestMessage;
+    uri = URI(finalPath);
+    resp = send(r, uri);
+    curve = resp.Body.Data;
+end
