@@ -14,7 +14,7 @@ function curve = fetchCurve(path)
 %
 % IN:
 %	path - curve's id or path to it
-%	examples: 'http://alpha.splinecloud.com/api/curves/CURVE_ID' or 'CURVE_ID'
+%	examples: 'https://splinecloud.com/api/curves/CURVE_ID' or 'CURVE_ID'
 %
 % OUT:
 %	curve - NURBS curve
@@ -22,7 +22,7 @@ function curve = fetchCurve(path)
 import matlab.net.*
 import matlab.net.http.*
 
-defaultAdress = 'http://alpha.splinecloud.com/api/curves/';
+defaultAdress = 'https://splinecloud.com/api/curves/';
 finalPath = '';
 
 if contains(path, defaultAdress)
